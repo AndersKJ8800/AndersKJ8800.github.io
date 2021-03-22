@@ -3,6 +3,10 @@ class MainMenu extends Scene
   constructor()
   {
     super();
+    this.buttons =
+    [
+      new Button("yo", 100, 400, 100, 60)
+    ];
   }
 
   specificDraw()

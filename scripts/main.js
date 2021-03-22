@@ -8,6 +8,8 @@ function setup()
 {
   frameRate(60);
   angleMode(DEGREES);
+  rectMode(CENTER);
+  textAlign(CENTER, CENTER);
   createScaledCanvas(RES_X, RES_Y);
   masterVolume(0.1);
   scene =
@@ -26,7 +28,6 @@ function windowResized()
 function draw()
 {
   scale(scaling);
-  background(255,0,255);
   drawScenes();
 }
 

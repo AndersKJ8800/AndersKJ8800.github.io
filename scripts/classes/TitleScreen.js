@@ -14,6 +14,6 @@ class TitleScreen extends Scene
 
   keybind()
   {
-
+    updateActiveScene(scene.mainMenu);
   }
 }
