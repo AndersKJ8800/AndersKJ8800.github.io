@@ -3,6 +3,9 @@ const RES_Y = 960;
 let scaling = 1;
 let scene;
 let activeScene;
+let mX;
+let mY;
+let cursorType = "normal";
 
 function setup()
 {
@@ -27,12 +30,32 @@ function windowResized()
 
 function draw()
 {
+  cursorType = "normal";
+  mX = mouseX / scaling;
+  mY = mouseY / scaling;
+  scene[activeScene].hitReg("hover");
   scale(scaling);
   drawScenes();
+
+  // tegn cursor
+  if (cursorType == "normal") cursor("resources/images/placeholder.png");
+  switch (cursorType)
+  {
+    case "normal": cursor("resources/images/cursor_normal.png"); break;
+    case "hover": cursor("resources/images/cursor_hover.png"); break;
+  }
+
 }
 
 
 function keyTyped()
 {
   scene[activeScene].keybind(key);
+}
+
+function mousePressed()
+{
+  mX = mouseX / scaling;
+  mY = mouseY / scaling;
+  scene[activeScene].hitReg("click");
 }
