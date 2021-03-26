@@ -19,8 +19,9 @@ class MainMenu extends Scene
     }
   }
 
-  specificDraw()
+  draw()
   {
+    super.draw();
     textSize(100);
     fill(0,255,0);
     text("main", 400, 200);

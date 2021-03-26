@@ -5,8 +5,9 @@ class TitleScreen extends Scene
     super();
   }
 
-  specificDraw()
+  draw()
   {
+    super.draw();
     textSize(100);
     fill(0,255,0);
     text("title", 400, 200);

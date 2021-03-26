@@ -38,11 +38,11 @@ function draw()
   drawScenes();
 
   // tegn cursor
-  if (cursorType == "normal") cursor("resources/images/placeholder.png");
   switch (cursorType)
   {
     case "normal": cursor("resources/images/cursor_normal.png"); break;
     case "hover": cursor("resources/images/cursor_hover.png"); break;
+    default: cursor("resources/images/placeholder.png");
   }
 
 }

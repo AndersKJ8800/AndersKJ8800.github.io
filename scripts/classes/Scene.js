@@ -11,15 +11,11 @@ class Scene
   draw()
   {
     image(this.background, 0, 0, RES_X, RES_Y);
-    this.specificDraw();
     for (let i = 0; i < this.buttonsArr.length; i++)
     {
       this.buttons[this.buttonsArr[i][0]].draw();
-      //this.buttonsArr[i][1].draw();
     }
   }
-
-  specificDraw() {}
 
   hitReg(hoverOrClick)
   {
