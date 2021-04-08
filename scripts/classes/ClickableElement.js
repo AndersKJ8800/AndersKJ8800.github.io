@@ -26,6 +26,7 @@ class ClickableElement
       if (hoverOrClick == "hover")
       {
         this.hovering = true;
+        cursorType = "hover";
       }
       if (hoverOrClick == "click")
       {
@@ -38,7 +39,6 @@ class ClickableElement
 
   effect()
   {
-    updateActiveScene(scene.titleScreen);
     //blankt
   }
 }

@@ -12,9 +12,13 @@ class Button
 
   draw()
   {
-    fill(255);
-    if (this.hovering) fill(255,0,0);
-    stroke(0);
+    fill(color.buttonFill);
+    stroke(color.buttonAccent);
+    if (this.hovering)
+    {
+      fill(color.buttonFillDark);
+      stroke(color.buttonAccentLight);
+    }
     strokeWeight(this.strokeWeight);
     rect(this.x, this.y, this.width, this.height);
     textSize(30);
