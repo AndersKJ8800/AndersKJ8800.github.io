@@ -7,7 +7,12 @@ class SnegleMinigame extends Scene
     {
 
     };
+    this.dialogBoxes =
+    {
+      tilbage: new DialogBoxToLobby()
+    };
     this.buttonsArr = Object.entries(this.buttons);
+    this.dialogBoxesArr = Object.entries(this.dialogBoxes);
     this.background = img.background.sneglehuse;
 
   }
@@ -22,11 +27,7 @@ class SnegleMinigame extends Scene
 
   keybind()
   {
-    switch (key)
-    {
-
-    }
-    updateActiveScene(scene.mainMenu, "black", "medium");
+    this.dialogBoxes.tilbage.isActive = true;
   }
 
 }

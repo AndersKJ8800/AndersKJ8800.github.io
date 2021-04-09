@@ -6,6 +6,8 @@ class Scene
     this.background = img.placeholder;
     this.buttons = {};
     this.buttonsArr = [];
+    this.dialogBoxes = {};
+    this.dialogBoxesArr = [];
   }
 
   draw()
@@ -15,13 +17,37 @@ class Scene
     {
       this.buttons[this.buttonsArr[i][0]].draw();
     }
+    for (let i = 0; i < this.dialogBoxesArr.length; i++)
+    {
+      this.dialogBoxes[this.dialogBoxesArr[i][0]].draw();
+    }
   }
 
   hitReg(hoverOrClick)
   {
-    for (let i = this.buttonsArr.length - 1; i >= 0; i--)
+    let continueHitreg = true;
+    for (let i = this.dialogBoxesArr.length - 1; i >= 0; i--)
     {
-      if (this.buttons[this.buttonsArr[i][0]].hitReg(hoverOrClick) == true) break;
+      for (let j = this.dialogBoxesArr[i][1].buttonsArr.length - 1; j >= 0; j--)
+      {
+        if (this.dialogBoxes[this.dialogBoxesArr[i][0]].isActive)
+        {
+          continueHitreg = false;
+          if (this.dialogBoxes[this.dialogBoxesArr[i][0]].buttonsArr[j].hitReg(hoverOrClick, this.dialogBoxes[this.dialogBoxesArr[i][0]].x, this.dialogBoxes[this.dialogBoxesArr[i][0]].y) == true)
+          {
+            print("yo");
+            break;
+          }
+        }
+
+      }
+    }
+    if (continueHitreg)
+    {
+      for (let i = this.buttonsArr.length - 1; i >= 0; i--)
+      {
+        if (this.buttons[this.buttonsArr[i][0]].hitReg(hoverOrClick, 0, 0) == true) break;
+      }
     }
   }
 

@@ -21,19 +21,19 @@ class Button
     }
     strokeWeight(this.strokeWeight);
     rect(this.x, this.y, this.width, this.height);
-    textSize(30);
+    textSize(40);
     strokeWeight(0);
     fill(0);
     text(this.string, this.x, this.y);
     this.hovering = false;
   }
 
-  hitReg(hoverOrClick)
+  hitReg(hoverOrClick, xOffset, yOffset)
   {
-    let leftBoundary = this.x - this.width / 2 - this.strokeWeight / 2;
-    let rightBoundary = this.x + this.width / 2 + this.strokeWeight / 2;
-    let upperBoundary = this.y - this.height / 2 - this.strokeWeight / 2;
-    let lowerBoundary = this.y + this.height / 2 + this.strokeWeight / 2;
+    let leftBoundary = (this.x + xOffset) - this.width / 2 - this.strokeWeight / 2;
+    let rightBoundary = (this.x + xOffset) + this.width / 2 + this.strokeWeight / 2;
+    let upperBoundary = (this.y + yOffset) - this.height / 2 - this.strokeWeight / 2;
+    let lowerBoundary = (this.y + yOffset) + this.height / 2 + this.strokeWeight / 2;
 
     if (mX >= leftBoundary && mX <= rightBoundary)
     {
