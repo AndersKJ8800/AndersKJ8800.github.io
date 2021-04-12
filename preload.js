@@ -3,7 +3,15 @@ let img =
   background: null,
   placeholder: null,
   complete: null,
-  incomplete: null
+  incomplete: null,
+  back: null
+};
+let hitboxImg =
+{
+  incomplete:
+  {
+    koraller: null
+  }
 };
 
 function preload()
@@ -12,7 +20,9 @@ function preload()
   img.background =
   {
     default: loadImage("resources/images/baggrunde/baggrund.png"),
-    sneglehuse: loadImage("resources/images/baggrunde/sneglehuse.png")
+    sneglehuse: loadImage("resources/images/baggrunde/sneglehuse.png"),
+    delfin: loadImage("resources/images/baggrunde/delfin.png"),
+    title: loadImage("resources/images/baggrunde/title.png")
   }
   img.incomplete =
   {
@@ -28,7 +38,11 @@ function preload()
     dykker: loadImage("resources/images/placeholder.png"),
     koraller: loadImage("resources/images/ren/rene_koraller.png")
   };
+  img.back = loadImage("resources/images/tilbage.png");
+  img.back_highlight = loadImage("resources/images/tilbage_highlight.png");
 
+  // custom hitboxes
+  hitboxImg.incomplete.koraller = loadImage("resources/images/ødelagt/døde_koraller_hitbox.png")
 
 
 }

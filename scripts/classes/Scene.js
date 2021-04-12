@@ -35,7 +35,6 @@ class Scene
           continueHitreg = false;
           if (this.dialogBoxes[this.dialogBoxesArr[i][0]].buttonsArr[j].hitReg(hoverOrClick, this.dialogBoxes[this.dialogBoxesArr[i][0]].x, this.dialogBoxes[this.dialogBoxesArr[i][0]].y) == true)
           {
-            print("yo");
             break;
           }
         }
@@ -51,6 +50,10 @@ class Scene
     }
   }
 
+  mousebind(key)
+  {
+    
+  }
 
   keybind(key)
   {

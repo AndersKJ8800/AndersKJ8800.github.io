@@ -3,16 +3,16 @@ class DykkerMinigame extends Scene
   constructor()
   {
     super();
-    this.buttons =
-    {
-
-    };
     this.dialogBoxes =
     {
       tilbage: new DialogBoxToLobby()
     };
-    this.buttonsArr = Object.entries(this.buttons);
     this.dialogBoxesArr = Object.entries(this.dialogBoxes);
+    this.buttons =
+    {
+      tilbage: new ArrowBack(this.dialogBoxes.tilbage)
+    };
+    this.buttonsArr = Object.entries(this.buttons);
     this.background = img.placeholder;
 
   }

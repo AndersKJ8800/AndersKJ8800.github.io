@@ -1,9 +1,15 @@
 class ClickableElement
 {
-  constructor(image)
+  constructor(image, imageHitbox)
   {
     this.image = image;
     this.hovering = false;
+    this.hitboxImg = this.image;
+
+    if (typeof(imageHitbox) != "undefined")
+    {
+      this.hitboxImg = imageHitbox;
+    }
   }
 
   draw()
@@ -18,11 +24,10 @@ class ClickableElement
   hitReg(hoverOrClick)
   {
     this.hovering = false;
-    let x = round(this.image.width / RES_X * mX);
-    let y = round(this.image.height / RES_Y * mY);
-    if (this.image.get(x,y)[3] == 255)
+    let x = round(this.hitboxImg.width / RES_X * mX);
+    let y = round(this.hitboxImg.height / RES_Y * mY);
+    if (this.hitboxImg.get(x,y)[3] == 255)
     {
-
       if (hoverOrClick == "hover")
       {
         this.hovering = true;
@@ -40,5 +45,6 @@ class ClickableElement
   effect()
   {
     //blankt
+    print("knap mangler effekt");
   }
 }

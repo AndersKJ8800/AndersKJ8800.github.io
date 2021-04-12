@@ -7,7 +7,7 @@ let mX;
 let mY;
 let cursorType = "normal";
 let prevSceneImg;
-let sceneIsFading;
+let sceneIsFading = false;
 let color =
 {
   buttonAccent: [81, 126, 49],
@@ -27,6 +27,7 @@ function setup()
   masterVolume(0.1);
   scene =
   {
+    titleScreen: new TitleScreen(),
     mainMenu: new MainMenu(),
     lobby: new Lobby(),
     snegleMinigame: new SnegleMinigame(),
@@ -34,7 +35,7 @@ function setup()
     dykkerMinigame: new DykkerMinigame(),
     koralMinigame: new KoralMinigame()
   }
-  updateActiveScene(scene.mainMenu, null, null);
+  updateActiveScene(scene.titleScreen, null, null);
 }
 
 function windowResized()
@@ -47,7 +48,7 @@ function draw()
   cursorType = "normal";
   mX = mouseX / scaling;
   mY = mouseY / scaling;
-  scene[activeScene].hitReg("hover");
+  if (!sceneIsFading) scene[activeScene].hitReg("hover");
   scale(scaling);
   drawScenes();
   sceneFading();
@@ -78,6 +79,7 @@ function mousePressed()
     mX = mouseX / scaling;
     mY = mouseY / scaling;
     scene[activeScene].hitReg("click");
+    scene[activeScene].mousebind(key);
   }
 }
 
