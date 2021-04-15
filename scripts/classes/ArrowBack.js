@@ -2,7 +2,7 @@ class ArrowBack extends ClickableElement
 {
   constructor(dialogBox)
   {
-    super(img.back);
+    super([img.back, null], [null, null], null);
     this.dialogBox = dialogBox;
   }
 

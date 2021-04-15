@@ -12,6 +12,7 @@ class TitleScreen extends Scene
     this.maxYOffset = 5512;
     this.yOffset = 0;
     this.panTime = 0;
+    this.panSpeed = 1.5;
     this.panDir;
   }
 
@@ -27,7 +28,7 @@ class TitleScreen extends Scene
       if (this.panTime < PI)
       {
         this.yOffset = (cos(this.panTime + PI) + 1) * this.maxYOffset / 2;
-        this.panTime += deltaTime / 1000;
+        this.panTime += deltaTime / 1000 * this.panSpeed;
       }
       else
       {
@@ -41,7 +42,7 @@ class TitleScreen extends Scene
       if (this.panTime < PI)
       {
         this.yOffset = (cos(this.panTime) + 1) * this.maxYOffset / 2;
-        this.panTime += deltaTime / 1000;
+        this.panTime += deltaTime / 1000 * this.panSpeed;
       }
       else
       {
@@ -53,8 +54,16 @@ class TitleScreen extends Scene
 
     image(this.backgroundCutout, 0, 0, RES_X, RES_Y)
 
-
-
+    push();
+    textSize(200);
+    colorMode(HSB);
+    fill((millis() / 5) % 360, 100, 100);
+    textAlign(CENTER, CENTER);
+    stroke(255);
+    strokeWeight(20);
+    text("Matlantis", RES_X / 2, RES_Y / 2 - (this.yOffset * 1.2));
+    colorMode(RGB);
+    pop();
 
     textSize(100);
     fill(0,255,0);

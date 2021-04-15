@@ -23,6 +23,7 @@ function setup()
   angleMode(DEGREES);
   rectMode(CENTER);
   textAlign(CENTER, CENTER);
+  createCanvas(1,1);
   createScaledCanvas(RES_X, RES_Y);
   masterVolume(0.1);
   scene =
@@ -33,7 +34,8 @@ function setup()
     snegleMinigame: new SnegleMinigame(),
     delfinMinigame: new DelfinMinigame(),
     dykkerMinigame: new DykkerMinigame(),
-    koralMinigame: new KoralMinigame()
+    koralMinigame: new KoralMinigame(),
+    fiskMinigame: new FiskMinigame()
   }
   updateActiveScene(scene.titleScreen, null, null);
 }
@@ -74,13 +76,18 @@ function keyTyped()
 
 function mousePressed()
 {
-  if (!sceneIsFading)
+  if (RES_Y * scaling >= mouseY && RES_X * scaling >= mouseX && mouseY >= 0 && mouseX >= 0) // hvis musen er indenfor spillets rammer
   {
-    mX = mouseX / scaling;
-    mY = mouseY / scaling;
-    scene[activeScene].hitReg("click");
-    scene[activeScene].mousebind(key);
+    if (!sceneIsFading)
+    {
+      mX = mouseX / scaling;
+      mY = mouseY / scaling;
+      scene[activeScene].hitReg("click");
+      scene[activeScene].mousebind(key);
+    }
   }
+
+
 }
 
 // deaktiver context menu (højre klik)

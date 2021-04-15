@@ -1,8 +1,14 @@
 class ClickableElement
 {
-  constructor(image, imageHitbox)
+  constructor(imageArr, highlightImageArr, changeHitboxOnImgUpdate, imageHitbox)
   {
-    this.image = image;
+    this.imageArr = imageArr;
+    this.imageVar = 0;
+    this.image = this.imageArr[this.imageVar];
+    this.highlightImageArr = highlightImageArr;
+    this.highlightImageVar = 0;
+    this.highlightImage = this.highlightImageArr[this.highlightImageVar];
+    this.changeHitboxOnImgUpdate = changeHitboxOnImgUpdate;
     this.hovering = false;
     this.hitboxImg = this.image;
 
@@ -15,9 +21,10 @@ class ClickableElement
   draw()
   {
     imageMode(CORNERS);
-    if (this.hovering) blendMode(DIFFERENCE); //temp
+    if (this.hovering) image(this.highlightImage, 0, 0, RES_X, RES_Y);
     image(this.image, 0, 0, RES_X, RES_Y);
-    blendMode(BLEND);
+
+
     imageMode(CORNER);
   }
 
@@ -46,5 +53,14 @@ class ClickableElement
   {
     //blankt
     print("knap mangler effekt");
+  }
+
+  // kald denne funktion når et minigame er vundet
+  updateImg()
+  {
+    this.imageVar = 1;
+    this.image = this.imageArr[this.imageVar];
+    this.highlightImage = this.highlightImageArr[this.imageVar];
+    if (this.changeHitboxOnImgUpdate) this.hitboxImg = this.image;
   }
 }

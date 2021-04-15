@@ -6,6 +6,6 @@ function createScaledCanvas(xRes, yRes)
   scaling = xScaling;
   if (yScaling < xScaling) scaling = yScaling;
 
-  createCanvas(xRes * scaling, yRes * scaling);
+  resizeCanvas(xRes * scaling, yRes * scaling);
 
 }
