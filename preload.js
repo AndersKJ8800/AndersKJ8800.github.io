@@ -103,7 +103,16 @@ function preload()
       loadImage("resources/images/minigames/koral/koral_3.png"),
       loadImage("resources/images/minigames/koral/koral_4.png"),
       loadImage("resources/images/minigames/koral/koral_5.png")
-    ]
+    ],
+    koral_highlight:
+    [
+      loadImage("resources/images/minigames/koral/koral_1_highlight.png"),
+      loadImage("resources/images/minigames/koral/koral_2_highlight.png"),
+      loadImage("resources/images/minigames/koral/koral_3_highlight.png"),
+      loadImage("resources/images/minigames/koral/koral_4_highlight.png"),
+      loadImage("resources/images/minigames/koral/koral_5_highlight.png")
+    ],
+    bobbel: loadImage("resources/images/minigames/koral/bobbel.png")
   }
   img.dyk =
   {

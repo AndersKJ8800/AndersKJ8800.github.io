@@ -15,14 +15,43 @@ class SnegleMinigame extends Scene
     this.buttonsArr = Object.entries(this.buttons);
     this.background = img.background.sneglehuse;
 
+
+
+
   }
 
   draw()
   {
-    super.draw();
-    textSize(100);
-    fill(0,255,0);
-    text("snezzle", 400, 200);
+    image(this.background, 0, 0, RES_X, RES_Y);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    for (let i = 0; i < this.buttonsArr.length; i++)
+    {
+      this.buttons[this.buttonsArr[i][0]].draw();
+    }
+    for (let i = 0; i < this.dialogBoxesArr.length; i++)
+    {
+      this.dialogBoxes[this.dialogBoxesArr[i][0]].draw();
+    }
+
   }
 
   keybind()

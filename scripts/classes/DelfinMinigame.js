@@ -229,7 +229,7 @@ class DelfinMinigame extends Scene
         if (this.userInput == this.target)
         {
           this.inactivity.doCounting = false;
-          print("rigtigt");
+          //print("rigtigt");
           this.wins++;
           if (this.wins < 5) this.initMinigame = true;
           else this.victory = true
@@ -237,10 +237,10 @@ class DelfinMinigame extends Scene
         else
         {
           this.inactivity.doCounting = false;
-          print("forkert");
+          //print("forkert");
           this.lives--;
           if (this.lives < 1) this.gameOver = true;
-          else this.initMinigame = true;
+          else this.runMinigame = true;
         }
       }
     }
