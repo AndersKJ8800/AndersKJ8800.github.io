@@ -20,7 +20,7 @@ class Button
       stroke(color.buttonAccentLight);
     }
     strokeWeight(this.strokeWeight);
-    rect(this.x, this.y, this.width, this.height);
+    rect(this.x, this.y, this.width, this.height, 10);
     textSize(40);
     strokeWeight(0);
     fill(0);

@@ -13,7 +13,7 @@ class KoralMinigame extends Scene
       tilbage: new ArrowBack(this.dialogBoxes.tilbage)
     };
     this.buttonsArr = Object.entries(this.buttons);
-    this.background = img.placeholder;
+    this.background = img.background.koral;
 
   }
 

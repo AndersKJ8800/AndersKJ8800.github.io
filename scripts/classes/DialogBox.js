@@ -21,7 +21,7 @@ class DialogBox
       strokeWeight(6);
       stroke(color.buttonAccent);
       fill(color.buttonFill);
-      rect(0, 0, this.width, this.height);
+      rect(0, 0, this.width, this.height, 10);
 
       for (let i = 0; i < this.buttonsArr.length; i++)
       {

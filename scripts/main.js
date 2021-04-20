@@ -26,6 +26,7 @@ function setup()
   createCanvas(1,1);
   createScaledCanvas(RES_X, RES_Y);
   masterVolume(0.1);
+  //music.default.play();
   scene =
   {
     titleScreen: new TitleScreen(),
@@ -37,7 +38,7 @@ function setup()
     koralMinigame: new KoralMinigame(),
     fiskMinigame: new FiskMinigame()
   }
-  updateActiveScene(scene.titleScreen, null, null);
+  updateActiveScene(scene.delfinMinigame, null, null);
 }
 
 function windowResized()
@@ -83,7 +84,7 @@ function mousePressed()
       mX = mouseX / scaling;
       mY = mouseY / scaling;
       scene[activeScene].hitReg("click");
-      scene[activeScene].mousebind(key);
+      scene[activeScene].mousebind();
     }
   }
 
