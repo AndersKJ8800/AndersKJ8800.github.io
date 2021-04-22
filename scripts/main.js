@@ -15,6 +15,7 @@ let color =
   buttonFill: [212, 203, 139],
   buttonFillDark: [192, 184, 118]
 }
+let mouseIsDown = false;
 
 function setup()
 {
@@ -38,7 +39,7 @@ function setup()
     koralMinigame: new KoralMinigame(),
     fiskMinigame: new FiskMinigame()
   }
-  updateActiveScene(scene.dykkerMinigame, null, null);
+  updateActiveScene(scene.fiskMinigame, null, null);
 }
 
 function windowResized()
@@ -85,11 +86,23 @@ function mousePressed()
       mY = mouseY / scaling;
       scene[activeScene].hitReg("click");
       scene[activeScene].mousebind();
+
+      if (activeScene == "fiskMinigame" && scene.fiskMinigame.stage == "runMinigame")
+      {
+        scene.fiskMinigame.onMousePress();
+      }
     }
   }
 
-
+  mouseIsDown = true;
 }
+
+function mouseReleased()
+{
+  mouseIsDown = false;
+}
+
+
 
 // deaktiver context menu (højre klik)
 document.addEventListener("contextmenu", function(e) {

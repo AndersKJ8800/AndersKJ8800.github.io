@@ -74,9 +74,7 @@ function preload()
     lives: [loadImage("resources/images/minigames/sneglehuse/1_liv.png"), loadImage("resources/images/minigames/sneglehuse/2_liv.png"), loadImage("resources/images/minigames/sneglehuse/3_liv.png")],
     shell: [loadImage("resources/images/minigames/sneglehuse/skal_1.png"), loadImage("resources/images/minigames/sneglehuse/skal_2.png"), loadImage("resources/images/minigames/sneglehuse/skal_3.png")],
     bubble: loadImage("resources/images/minigames/sneglehuse/bobbel.png"),
-    three: loadImage("resources/images/minigames/sneglehuse/3.png"),
-    four: loadImage("resources/images/minigames/sneglehuse/4.png"),
-    five: loadImage("resources/images/minigames/sneglehuse/5.png"),
+    n: [loadImage("resources/images/minigames/sneglehuse/3.png"), loadImage("resources/images/minigames/sneglehuse/4.png"), loadImage("resources/images/minigames/sneglehuse/5.png")]
   }
   img.fisk =
   {
@@ -91,7 +89,8 @@ function preload()
       loadImage("resources/images/minigames/fisk/styk_6.png"),
       loadImage("resources/images/minigames/fisk/styk_7.png"),
       loadImage("resources/images/minigames/fisk/styk_8.png")
-    ]
+    ],
+    styk_ikon: loadImage("resources/images/minigames/fisk/styk_ikon.png")
   }
   img.koral =
   {
