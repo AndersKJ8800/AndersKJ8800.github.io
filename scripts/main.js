@@ -16,6 +16,8 @@ let color =
   buttonFillDark: [192, 184, 118]
 }
 let mouseIsDown = false;
+let hintCountdownTime = 60000;
+let skildpadde = null;
 
 function setup()
 {
@@ -26,8 +28,9 @@ function setup()
   textAlign(CENTER, CENTER);
   createCanvas(1,1);
   createScaledCanvas(RES_X, RES_Y);
-  masterVolume(0.1);
+  masterVolume(0.06);
   //music.default.play();
+  skildpadde = new Skildpadde();
   scene =
   {
     titleScreen: new TitleScreen(),
@@ -39,7 +42,7 @@ function setup()
     koralMinigame: new KoralMinigame(),
     fiskMinigame: new FiskMinigame()
   }
-  updateActiveScene(scene.fiskMinigame, null, null);
+  updateActiveScene(scene.titleScreen, null, null);
 }
 
 function windowResized()

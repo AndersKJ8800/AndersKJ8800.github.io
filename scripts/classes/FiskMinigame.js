@@ -58,7 +58,7 @@ class FiskMinigame extends Scene
 
     if (true)
     {
-      this.stage = "initMinigame"
+      this.stage = "initMinigame";
     }
   }
 
@@ -69,6 +69,7 @@ class FiskMinigame extends Scene
       this.sliceArr[i].isActive = true;
       this.sliceArr[i].x = 0;
       this.sliceArr[i].y = 0;
+      this.sliceArr[i].isHolding = false;
     }
 
     this.nToFeed = ceil(random(2,5));
@@ -226,7 +227,6 @@ class FiskMinigame extends Scene
 
   rigtigt(n)
   {
-    print("rigtigt");
     this.fishArr[n].nFed++;
 
     let bool = true;
@@ -254,7 +254,6 @@ class FiskMinigame extends Scene
 
   forkert(n)
   {
-    print("forkert");
     this.lives--
     if (this.lives == 0)
     {

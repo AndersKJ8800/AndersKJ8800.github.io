@@ -28,6 +28,13 @@ class SnegleMinigame extends Scene
     this.brikArr = [];
     this.userInput;
 
+    this.soundHasPlayed =
+    {
+      intro: null,
+      vundet: null,
+      tabt: null,
+    }
+
   }
 
   init()
@@ -39,14 +46,24 @@ class SnegleMinigame extends Scene
     this.inactivity.doCounting = false;
     this.userInput = 1;
 
+    this.soundHasPlayed.intro = false;
+    this.soundHasPlayed.vundet = false;
+    this.soundHasPlayed.tabt = false;
+
     this.stage = "startSkærm";
   }
 
   startSkærm()
   {
-    // speak
+    // skilpadde speak
+    if (!this.soundHasPlayed.intro && !sound.sneglehuse.intro._playing && !sceneIsFading)
+    {
+      sound.sneglehuse.intro.play();
+      this.soundHasPlayed.intro = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.sneglehuse.intro._playing && this.soundHasPlayed.intro)
     {
       this.stage = "initMinigame";
     }
@@ -112,6 +129,8 @@ class SnegleMinigame extends Scene
   {
     image(this.background, 0, 0, RES_X, RES_Y);
 
+    skildpadde.draw("sneglespil");
+
     this[this.stage]();
 
     if (this.stage != "init" && this.stage != "startSkærm")
@@ -157,6 +176,7 @@ class SnegleMinigame extends Scene
     }
     else
     {
+      sound.rigtigt_svar.arr[ceil(random(0,6))-1].play();
       this.stage = "initMinigame";
     }
   }
@@ -168,11 +188,23 @@ class SnegleMinigame extends Scene
     {
       this.stage = "gameOver";
     }
+    else
+    {
+      sound.forkert_svar.arr[ceil(random(0,3))-1].play();
+    }
   }
 
   victory()
   {
-    if (true)
+    // skilpadde speak
+    if (!this.soundHasPlayed.vundet && !sound.sneglehuse.vundet._playing && !sceneIsFading)
+    {
+      sound.sneglehuse.vundet.play();
+      this.soundHasPlayed.vundet = true;
+    }
+
+    // når speaken er færdig
+    if (!sound.sneglehuse.vundet._playing && this.soundHasPlayed.vundet)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       scene.lobby.buttons.snegle.updateImg();
@@ -182,8 +214,15 @@ class SnegleMinigame extends Scene
 
   gameOver()
   {
-    // speak
-    if (true)
+    // skilpadde speak
+    if (!this.soundHasPlayed.tabt && !sound.sneglehuse.tabt._playing && !sceneIsFading)
+    {
+      sound.sneglehuse.tabt.play();
+      this.soundHasPlayed.tabt = true;
+    }
+
+    // når speaken er færdig
+    if (!sound.sneglehuse.tabt._playing && this.soundHasPlayed.tabt)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       this.init();

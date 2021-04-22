@@ -26,9 +26,9 @@ function updateActiveScene(newScene, fadeType, fadeSpeed)
     sceneFadeSpeed = fadeSpeed
     switch (fadeSpeed)
     {
-      case "slow": remainingFadeTime = 2000; break;
-      case "medium": remainingFadeTime = 1000; break;
-      case "fast": remainingFadeTime = 250; break;
+      case "slow": remainingFadeTime = 5000; break;
+      case "medium": remainingFadeTime = 2000; break;
+      case "fast": remainingFadeTime = 500; break;
     }
     totalFadeTime = remainingFadeTime;
   }

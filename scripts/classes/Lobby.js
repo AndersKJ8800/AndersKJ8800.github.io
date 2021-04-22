@@ -22,30 +22,42 @@ class Lobby extends Scene
 
     this.buttons["snegle"].effect = function()
     {
+      figurLyd();
       updateActiveScene(scene.snegleMinigame, "black", "slow");
     }
     this.buttons["delfin"].effect = function()
     {
+      figurLyd();
       updateActiveScene(scene.delfinMinigame, "black", "slow");
     }
     this.buttons["koraller"].effect = function()
     {
+      figurLyd();
       updateActiveScene(scene.koralMinigame, "black", "slow");
       scene.koralMinigame.stage = "init";
     }
     this.buttons["dykker"].effect = function()
     {
+      figurLyd();
       updateActiveScene(scene.dykkerMinigame, "black", "slow");
     }
     this.buttons["fisk"].effect = function()
     {
+      figurLyd();
       updateActiveScene(scene.fiskMinigame, "black", "slow");
     }
+
+    this.introHasPlayed = false;
 
   }
 
   draw()
   {
+    if (!this.introHasPlayed && !sceneIsFading)
+    {
+      sound.intro.play();
+      this.introHasPlayed = true;
+    }
     super.draw();
     textSize(100);
     fill(0,255,0);
@@ -57,4 +69,11 @@ class Lobby extends Scene
     this.dialogBoxes.tilbage.isActive = true;
   }
 
+
+}
+
+function figurLyd()
+{
+  sound.intro.stop();
+  sound.ved_klik_på_figur.arr[ceil(random(0,3))-1].play();
 }

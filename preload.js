@@ -6,7 +6,8 @@ let img =
   incomplete: null,
   back: null,
   delfin: null,
-  sneglehuse: null
+  sneglehuse: null,
+  skildpadde: null
 };
 let hitboxImg =
 {
@@ -18,6 +19,22 @@ let hitboxImg =
 let music =
 {
   default: null
+}
+let sound =
+{
+  start: null, // v
+  intro: null, // v
+  ved_klik_på_figur: null, // v
+  sneglehuse: null, // v
+  delfinbad: null, // v
+  fiskemad: null,
+  dykkerens_kort: null,
+  koralrev: null,
+  jokes: null,
+  dialogbox: null, // v
+  vundet_spil: null, //
+  rigtigt_svar: null, //
+  forkert_svar: null //
 }
 
 function preload()
@@ -118,9 +135,20 @@ function preload()
     lives: [loadImage("resources/images/minigames/dyk/1_liv.png"), loadImage("resources/images/minigames/dyk/2_liv.png"), loadImage("resources/images/minigames/dyk/3_liv.png")],
     kort: loadImage("resources/images/minigames/dyk/kort.png")
   }
+  img.skildpadde =
+  {
+    def: [loadImage("resources/images/skildpadde/def.png"), loadImage("resources/images/skildpadde/def_mund.png")],
+    delfinspil: [loadImage("resources/images/skildpadde/delfinspil.png"), loadImage("resources/images/skildpadde/delfinspil_mund.png")],
+    dykkerspil: [loadImage("resources/images/skildpadde/dykkerspil.png"), loadImage("resources/images/skildpadde/dykkerspil_mund.png")],
+    fiskemad: [loadImage("resources/images/skildpadde/fiskemad.png"), loadImage("resources/images/skildpadde/fiskemad_mund.png")],
+    koralspil: [loadImage("resources/images/skildpadde/koralspil.png"), loadImage("resources/images/skildpadde/koralspil_mund.png")],
+    sneglespil: [loadImage("resources/images/skildpadde/sneglespil.png"), loadImage("resources/images/skildpadde/sneglespil_mund.png")]
+  }
 
   // custom hitboxes
   hitboxImg.incomplete.koraller = loadImage("resources/images/ødelagt/døde_koraller_hitbox.png")
+
+
 
   //musssik
   music =
@@ -128,5 +156,104 @@ function preload()
     //default: loadSound("resources/sound/music/default.mp3")
   }
 
+  sound =
+  {
+    start: ls(0,"start"),
+    intro: ls(1,"intro"),
+    ved_klik_på_figur:
+    {
+      arr:
+      [
+        ls(2,"Lad os"),
+        ls(2,"Red matlantis"),
+        ls(2,"Cowabunga")
+      ]
+    },
+    sneglehuse:
+    {
+      intro: ls(3,"intro"),
+      vundet: ls(3,"vundet"),
+      tabt: ls(3,"tabt"),
+      manglende_klik: ls(3,"manglende klik"),
+    },
+    delfinbad:
+    {
+      intro: ls(4,"intro"),
+      vundet: ls(4,"vundet"),
+      tabt: ls(4,"tabt"),
+      manglende_klik: ls(4,"manglende klik"),
+    },
+    fiskemad:
+    {
+      intro: ls(5,"intro"),
+      vundet: ls(5,"vundet"),
+      tabt: ls(5,"tabt"),
+      manglende_klik: ls(5,"manglende klik"),
+    },
+    dykkerens_kort:
+    {
+      intro: ls(6,"intro"),
+      vundet: ls(6,"vundet"),
+      tabt: ls(6,"tabt"),
+      manglende_klik: ls(6,"manglende klik"),
+    },
+    koralrev:
+    {
+      intro: ls(7,"intro"),
+      vundet: ls(7,"vundet"),
+      tabt: ls(7,"tabt"),
+      manglende_klik: ls(7,"manglende klik"),
+    },
+    jokes:
+    {
+      arr:
+      [
+        ls(8,"dykker"), ls(8,"haj"), ls(8,"fisk")
+      ]
+    },
+    dialogbox:
+    {
+      afslut_spil: ls(9,"afslut spillet"),
+      tilbage: ls(9,"tilbage")
+    },
+    vundet_spil: ls(10,"vundet spil"),
+    rigtigt_svar:
+    {
+      arr:
+      [
+        ls(11,"rigtigt svar 1"), ls(11,"rigtigt svar 2"), ls(11,"rigtigt svar 3"), ls(11,"rigtigt svar 4"), ls(11,"rigtigt svar 5"), ls(11,"rigtigt svar 6")
+      ]
+    },
+    forkert_svar:
+    {
+      arr:
+      [
+        ls(12,"forkert svar 1"), ls(12,"forkert svar 2"), ls(12,"forkert svar 3")
+      ]
+    }
+  }
 
+
+}
+
+function ls (int, string)
+{
+  folderNameArr =
+  [
+    "0_start",
+    "1_intro",
+    "2_ved klik på figur",
+    "3_sneglehuse",
+    "4_delfinbad",
+    "5_fiskemad",
+    "6_dykkerens kort",
+    "7_koralrev",
+    "8_jokes",
+    "9_dialogboks",
+    "10_vundet spil",
+    "11_rigtigt svar",
+    "12_forkert svar"
+  ];
+
+  return loadSound("resources/sound/" + folderNameArr[int] + "/" + string + ".mp3");
 }

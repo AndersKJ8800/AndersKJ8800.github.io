@@ -19,13 +19,22 @@ class MainMenu extends Scene
 
     this.buttons.start.effect = function()
     {
+      sound.start.stop()
       updateActiveScene(scene.lobby, "black", "slow");
     }
+
+    this.startSoundHasPlayed = false;
   }
 
   draw()
   {
     super.draw();
+    if (!this.startSoundHasPlayed)
+    {
+      sound.start.play();
+      this.startSoundHasPlayed = true;
+    }
+
     textSize(100);
     fill(0,255,0);
     text("main", 400, 200);
@@ -33,6 +42,6 @@ class MainMenu extends Scene
 
   keybind()
   {
-    
+
   }
 }

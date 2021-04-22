@@ -15,7 +15,8 @@ class DelfinMinigame extends Scene
     this.buttonsArr = Object.entries(this.buttons);
     this.background = img.background.delfin;
 
-    this.startSkærm = true;
+    this.init = true;
+    this.startSkærm = false;
     this.initMinigame = false;
     this.dl = null;
     this.inactivity =
@@ -28,6 +29,12 @@ class DelfinMinigame extends Scene
     this.wins = 0;
     this.victory = false;
     this.gameOver = false;
+    this.soundHasPlayed =
+    {
+      intro: null,
+      vundet: null,
+      tabt: null,
+    }
 
   }
 
@@ -35,16 +42,34 @@ class DelfinMinigame extends Scene
   {
     image(this.background, 0, 0, RES_X, RES_Y);
 
+    skildpadde.draw("delfinspil");
+
     if (this.lives > 0) image(img.delfin.lives[this.lives - 1], 0, 0, RES_X, RES_Y);
 
-    if (this.startSkærm)
+    if (this.init)
     {
       this.lives = 3;
       this.wins = 0;
-      // to do: skilpadde speak
+      this.soundHasPlayed.intro = false;
+      this.soundHasPlayed.vundet = false;
+      this.soundHasPlayed.tabt = false;
+
+      this.init = false;
+      this.startSkærm = true;
+    }
+
+    if (this.startSkærm)
+    {
+
+      // skilpadde speak
+      if (!this.soundHasPlayed.intro && !sound.delfinbad.intro._playing && !sceneIsFading)
+      {
+        sound.delfinbad.intro.play();
+        this.soundHasPlayed.intro = true;
+      }
 
       // når speaken er færdig
-      if (true)
+      if (!sound.delfinbad.intro._playing && this.soundHasPlayed.intro)
       {
         this.startSkærm = false;
         this.initMinigame = true;
@@ -89,26 +114,27 @@ class DelfinMinigame extends Scene
 
       fill(255);
       textSize(60);
-      text("der skal " + this.target + " dl sæbe i denne beholder", 600, 400);
+      text("Der skal " + this.target + " dl sæbe i denne beholder", 600, 400);
+
+      let mX = mouseX / scaling;
+      let mY = mouseY / scaling;
 
       if (this.dl == 10 && !this.dialogBoxes.tilbage.isActive)
       {
-        if (mouseX > 550 && mouseX < 970)
+        if (mX > 550 * 5/3 && mX < 970 * 5/3)
         {
 
-          if (mouseY > 400 && mouseY < 795)
+          if (mY > 400 * 5/3 && mY < 795 * 5/3)
           {
-            this.userInput = (abs(ceil((mouseY - 417 - 362) / 40.2222 - 0.5)) + 1);
-            scale(1/scaling);
+            this.userInput = (abs(ceil((mY - 417 * 5/3 - 362 * 5/3) / (40.2222 * 5/3) - 0.5)) + 1);
             let arrowPos =
             {
               x: [949, 947, 942, 936, 922, 899, 875, 874, 870, 872],
               y: [781, 730, 695, 654, 620, 583, 542, 501, 455, 413]
             }
-            let x = arrowPos.x[this.userInput - 1];
-            let y = arrowPos.y[this.userInput - 1];
-            image(img.delfin.arrow, x, y - 20);
-            scale(scaling);
+            let x = arrowPos.x[this.userInput - 1] * (5/3);
+            let y = arrowPos.y[this.userInput - 1] * (5/3);
+            image(img.delfin.arrow, x, y - 42);
           }
           else
           {
@@ -123,24 +149,22 @@ class DelfinMinigame extends Scene
 
       if (this.dl == 12 && !this.dialogBoxes.tilbage.isActive)
       {
-        if (mouseX > 550 && mouseX < 970)
+        if (mX > 550 * 5/3 && mX < 970 * 5/3)
         {
 
-          if (mouseY > 410 && mouseY < 795)
+          if (mY > 410 * 5/3 && mY < 795 * 5/3)
           {
-            this.userInput = (abs(ceil((mouseY - 417 - 350) / 28.857 - 0.5)) + 1);
-            if (mouseY > 774) this.userInput = 1;
-            if (mouseY < 450) this.userInput = 12;
-            scale(1/scaling);
+            this.userInput = (abs(ceil((mY - 417 * 5/3 - 350 * 5/3) / (28.857 * 5/3) - 0.5)) + 1);
+            if (mY > 774 * 5/3) this.userInput = 1;
+            if (mY < 450 * 5/3) this.userInput = 12;
             let arrowPos =
             {
               x: [951, 951, 944, 937, 931, 919, 900, 886, 874, 871, 867, 869],
               y: [783, 752, 711, 679, 653, 620, 591, 564, 532, 497, 469, 432]
             }
-            let x = arrowPos.x[this.userInput - 1];
-            let y = arrowPos.y[this.userInput - 1];
-            image(img.delfin.arrow, x, y - 20);
-            scale(scaling);
+            let x = arrowPos.x[this.userInput - 1] * (5/3);
+            let y = arrowPos.y[this.userInput - 1] * (5/3);
+            image(img.delfin.arrow, x, y - 42);
           }
           else
           {
@@ -155,24 +179,22 @@ class DelfinMinigame extends Scene
 
       if (this.dl == 15 && !this.dialogBoxes.tilbage.isActive)
       {
-        if (mouseX > 550 && mouseX < 970)
+        if (mX > 550 * 5/3 && mX < 970 * 5/3)
         {
 
-          if (mouseY > 350 && mouseY < 843)
+          if (mY > 350 * 5/3 && mY < 843 * 5/3)
           {
-            this.userInput = (abs(ceil((mouseY - 375 - 440) / 31.43 - 0.5)) + 1);
-            if (mouseY > 800) this.userInput = 1;
-            if (mouseY < 386) this.userInput = 15;
-            scale(1/scaling);
+            this.userInput = (abs(ceil((mY - 375 * 5/3 - 440 * 5/3) / (31.43 * 5/3) - 0.5)) + 1);
+            if (mY > 800 * 5/3) this.userInput = 1;
+            if (mY < 386 * 5/3) this.userInput = 15;
             let arrowPos =
             {
               x: [935, 951, 954, 946, 940, 933, 919, 900, 884, 871, 868, 867, 871, 869, 857],
               y: [820, 784, 752, 714, 682, 655, 620, 594, 565, 533, 503, 474, 431, 400, 371]
             }
-            let x = arrowPos.x[this.userInput - 1];
-            let y = arrowPos.y[this.userInput - 1];
-            image(img.delfin.arrow, x, y - 20);
-            scale(scaling);
+            let x = arrowPos.x[this.userInput - 1] * 5/3;
+            let y = arrowPos.y[this.userInput - 1] * 5/3;
+            image(img.delfin.arrow, x, y - 42);
           }
           else
           {
@@ -189,26 +211,38 @@ class DelfinMinigame extends Scene
 
     if (this.victory)
     {
-      // speak
 
-      // når speak er ovre
-      if (true)
+      // skilpadde speak
+      if (!this.soundHasPlayed.vundet && !sound.delfinbad.vundet._playing && !sceneIsFading)
+      {
+        sound.delfinbad.vundet.play();
+        this.soundHasPlayed.vundet = true;
+      }
+
+      // når speaken er færdig
+      if (!sound.delfinbad.vundet._playing && this.soundHasPlayed.vundet)
       {
         this.victory = false;
-        this.startSkærm = true;
+        this.init = true;
         scene.lobby.buttons.delfin.updateImg();
         updateActiveScene(scene.lobby, "black", "slow");
       }
+
     }
 
     if (this.gameOver)
     {
-      // speak
-
-      // når speak er ovre
-      if (true)
+      // skilpadde speak
+      if (!this.soundHasPlayed.tabt && !sound.delfinbad.tabt._playing && !sceneIsFading)
       {
-        this.startSkærm = true;
+        sound.delfinbad.tabt.play();
+        this.soundHasPlayed.tabt = true;
+      }
+
+      // når speaken er færdig
+      if (!sound.delfinbad.tabt._playing && this.soundHasPlayed.tabt)
+      {
+        this.init = true;
         this.gameOver = false;
         updateActiveScene(scene.lobby, "black", "slow");
       }
@@ -229,10 +263,13 @@ class DelfinMinigame extends Scene
         if (this.userInput == this.target)
         {
           this.inactivity.doCounting = false;
-          //print("rigtigt");
           this.wins++;
-          if (this.wins < 5) this.initMinigame = true;
-          else this.victory = true
+          if (this.wins < 5)
+          {
+            sound.rigtigt_svar.arr[ceil(random(0,6))-1].play();
+            this.initMinigame = true;
+          }
+          else this.victory = true;
         }
         else
         {
@@ -240,7 +277,11 @@ class DelfinMinigame extends Scene
           //print("forkert");
           this.lives--;
           if (this.lives < 1) this.gameOver = true;
-          else this.runMinigame = true;
+          else
+          {
+            sound.forkert_svar.arr[ceil(random(0,3))-1].play();
+            this.runMinigame = true;
+          }
         }
       }
     }
