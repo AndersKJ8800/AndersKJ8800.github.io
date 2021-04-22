@@ -78,8 +78,7 @@ class KoralMinigame extends Scene
     this.lives = 3;
     this.wins = 0;
     this.inactivity.timer = 0;
-    this.inactivity.doCounting = true;
-
+    this.inactivity.doCounting = false;
 
 
     this.stage = "startScreen";
@@ -103,7 +102,7 @@ class KoralMinigame extends Scene
     this.correctAnswers = [false,false,false,false,false];
 
     this.threshold = round(random(0.4, 1.2) * 20) / 20; // tal mellem 0.4 og 1.5 afrundet til en tyvende-del (0.35, 0.1, 1.45, etc.)
-    this.nAboveThreshold = ceil(random(0,4)); // antal af koraller der skal være højere
+    this.nAboveThreshold = ceil(random(1,4)); // antal af koraller der skal være højere
 
     this.nArray = [[null, false, null, true],[null, false, null, true],[null, false, null, true],[null, false, null, true],[null, false, null, true]];
 
@@ -199,6 +198,8 @@ class KoralMinigame extends Scene
   runMinigame()
   {
 
+    if (this.inactivity.doCounting) this.inactivity.timer += deltaTime;
+
     {
       push()
       image(img.koral.bobbel,0,0,RES_X,RES_Y);
@@ -245,7 +246,7 @@ class KoralMinigame extends Scene
   victory()
   {
     // speak
-    
+
     if (true)
     {
       updateActiveScene(scene.lobby, "black", "slow");
@@ -261,7 +262,7 @@ class KoralMinigame extends Scene
     if (true)
     {
       updateActiveScene(scene.lobby, "black", "slow");
-      scene.lobby.buttons.delfin.updateImg();
+      this.init();
     }
   }
 
@@ -320,7 +321,7 @@ class KoralMinigame extends Scene
         }
         else
         {
-          this.initMinigame();
+          this.stage = "initMinigame";
         }
       }
     }

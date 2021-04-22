@@ -196,8 +196,8 @@ class DelfinMinigame extends Scene
       {
         this.victory = false;
         this.startSkærm = true;
-        updateActiveScene(scene.lobby, "black", "slow");
         scene.lobby.buttons.delfin.updateImg();
+        updateActiveScene(scene.lobby, "black", "slow");
       }
     }
 

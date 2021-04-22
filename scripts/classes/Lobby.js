@@ -31,6 +31,7 @@ class Lobby extends Scene
     this.buttons["koraller"].effect = function()
     {
       updateActiveScene(scene.koralMinigame, "black", "slow");
+      scene.koralMinigame.stage = "init";
     }
     this.buttons["dykker"].effect = function()
     {

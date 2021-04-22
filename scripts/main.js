@@ -38,7 +38,7 @@ function setup()
     koralMinigame: new KoralMinigame(),
     fiskMinigame: new FiskMinigame()
   }
-  updateActiveScene(scene.koralMinigame, null, null);
+  updateActiveScene(scene.dykkerMinigame, null, null);
 }
 
 function windowResized()
