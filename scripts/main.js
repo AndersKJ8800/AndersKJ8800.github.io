@@ -90,7 +90,7 @@ function keyTyped()
 
 function mousePressed()
 {
-  if (!music._playing)
+  if (!music._playing && !partyMusic._playing)
   {
     music.loop();
     music.setVolume(0.1);
