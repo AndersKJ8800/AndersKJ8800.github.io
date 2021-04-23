@@ -121,7 +121,30 @@ class DelfinMinigame extends Scene
 
       fill(255);
       textSize(60);
-      text("Der skal " + this.target + " dl sæbe i denne beholder", 600, 400);
+
+      let str = this.target.toString();
+
+      if (this.dl == 10 && this.target == 2) str = "1/5";
+      if (this.dl == 10 && this.target == 4) str = "2/5";
+      if (this.dl == 10 && this.target == 5) str = "1/2";
+      if (this.dl == 10 && this.target == 6) str = "3/5";
+      if (this.dl == 10 && this.target == 8) str = "4/5";
+
+      if (this.dl == 12 && this.target == 2) str = "1/6";
+      if (this.dl == 12 && this.target == 4) str = "1/3";
+      if (this.dl == 12 && this.target == 6) str = "1/2";
+      if (this.dl == 12 && this.target == 8) str = "2/3";
+      if (this.dl == 12 && this.target == 10) str = "5/6";
+
+      if (this.dl == 15 && this.target == 5) str = "1/3";
+      if (this.dl == 15 && this.target == 10) str = "2/3";
+      if (this.dl == 15 && this.target == 3) str = "1/5";
+      if (this.dl == 15 && this.target == 6) str = "2/5";
+      if (this.dl == 15 && this.target == 9) str = "3/5";
+      if (this.dl == 15 && this.target == 12) str = "4/5";
+
+
+      text("Der skal " + str + " dl sæbe i denne beholder", 600, 400);
 
       let mX = mouseX / scaling;
       let mY = mouseY / scaling;

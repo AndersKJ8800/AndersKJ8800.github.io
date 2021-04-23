@@ -59,8 +59,6 @@ class Lobby extends Scene
       this.introHasPlayed = true;
     }
 
-    skildpadde.draw("def");
-
     allMinigamesWon = true;
     if (!minigamesWon.delfin) allMinigamesWon = false;
     if (!minigamesWon.dykker) allMinigamesWon = false;
@@ -83,6 +81,8 @@ class Lobby extends Scene
       }
     }
     super.draw();
+
+    skildpadde.draw("def");
   }
 
   keybind()
