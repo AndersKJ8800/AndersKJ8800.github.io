@@ -28,7 +28,7 @@ function setup()
   textAlign(CENTER, CENTER);
   createCanvas(1,1);
   createScaledCanvas(RES_X, RES_Y);
-  masterVolume(0.06);
+  masterVolume(0.2);
   //music.default.play();
   skildpadde = new Skildpadde();
   scene =
@@ -94,6 +94,22 @@ function mousePressed()
       {
         scene.fiskMinigame.onMousePress();
       }
+
+      let bool = false;
+      if (sound.sneglehuse.intro._playing) bool = true;
+      if (sound.delfinbad.intro._playing) bool = true;
+      if (sound.fiskemad.intro._playing) bool = true;
+      if (sound.dykkerens_kort.intro._playing) bool = true;
+      if (sound.koralrev.intro._playing) bool = true;
+      if (bool)
+      {
+        sound.sneglehuse.intro.stop();
+        sound.delfinbad.intro.stop();
+        sound.fiskemad.intro.stop();
+        sound.dykkerens_kort.intro.stop();
+        sound.koralrev.intro.stop();
+      }
+
     }
   }
 

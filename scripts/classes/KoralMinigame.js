@@ -41,6 +41,13 @@ class KoralMinigame extends Scene
     this.target;
     this.correctAnswers;
 
+    this.soundHasPlayed =
+    {
+      intro: null,
+      vundet: null,
+      tabt: null
+    }
+
   }
 
   draw()
@@ -48,12 +55,17 @@ class KoralMinigame extends Scene
     image(this.background, 0, 0, RES_X, RES_Y);
 
     this[this.stage]();
-    if (this.inactivity.doCounting) this.inactivity.timer += deltaTime;
 
-    if (this.inactivity.timer > 60000)
+    skildpadde.draw("koralspil");
+
+    if (this.stage == "runMinigame" && this.inactivity.doCounting)
     {
-      // to do
-      this.inactivity.timer = 0;
+      this.inactivity.timer += deltaTime;
+      if (this.inactivity.timer > hintCountdownTime)
+      {
+        this.inactivity.timer = 0;
+        sound.koralrev.manglende_klik.play();
+      }
     }
 
 
@@ -78,17 +90,26 @@ class KoralMinigame extends Scene
     this.lives = 3;
     this.wins = 0;
     this.inactivity.timer = 0;
-    this.inactivity.doCounting = false;
+    this.inactivity.doCounting = true;
 
+    this.soundHasPlayed.intro = false;
+    this.soundHasPlayed.vundet = false;
+    this.soundHasPlayed.tabt = false;
 
     this.stage = "startScreen";
   }
 
   startScreen()
   {
-    // speak
+    // skilpadde speak
+    if (!this.soundHasPlayed.intro && !sound.koralrev.intro._playing && !sceneIsFading)
+    {
+      sound.koralrev.intro.play();
+      this.soundHasPlayed.intro = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.koralrev.intro._playing && this.soundHasPlayed.intro)
     {
       this.stage = "initMinigame";
     }
@@ -245,9 +266,15 @@ class KoralMinigame extends Scene
 
   victory()
   {
-    // speak
+    // skilpadde speak
+    if (!this.soundHasPlayed.vundet && !sound.koralrev.vundet._playing && !sceneIsFading)
+    {
+      sound.koralrev.vundet.play();
+      this.soundHasPlayed.vundet = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.koralrev.vundet._playing && this.soundHasPlayed.vundet)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       scene.lobby.buttons.koraller.updateImg();
@@ -257,9 +284,15 @@ class KoralMinigame extends Scene
 
   gameOver()
   {
-    // speak
+    // skilpadde speak
+    if (!this.soundHasPlayed.tabt && !sound.koralrev.tabt._playing && !sceneIsFading)
+    {
+      sound.koralrev.tabt.play();
+      this.soundHasPlayed.tabt = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.koralrev.tabt._playing && this.soundHasPlayed.tabt)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       this.init();
@@ -315,12 +348,13 @@ class KoralMinigame extends Scene
       if (this.remaining == 0)
       {
         this.wins++;
-        if (this.wins == 3)
+        if (this.wins == 5)
         {
           this.stage = "victory";
         }
         else
         {
+          sound.rigtigt_svar.arr[ceil(random(0,6))-1].play();
           this.stage = "initMinigame";
         }
       }
@@ -334,7 +368,14 @@ class KoralMinigame extends Scene
   {
     this.inactivity.doCounting = false;
     this.lives--;
-    if (this.lives <= 0) this.stage = "gameOver";
+    if (this.lives <= 0)
+    {
+      this.stage = "gameOver";
+    }
+    else
+    {
+      sound.forkert_svar.arr[ceil(random(0,3))-1].play();
+    }
   }
 
   decimalToComma(string)

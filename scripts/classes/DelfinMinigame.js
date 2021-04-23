@@ -22,7 +22,7 @@ class DelfinMinigame extends Scene
     this.inactivity =
     {
       doCounting: true,
-      time: 0
+      timer: 0
     };
     this.runMinigame = false;
     this.lives = 3;
@@ -33,7 +33,7 @@ class DelfinMinigame extends Scene
     {
       intro: null,
       vundet: null,
-      tabt: null,
+      tabt: null
     }
 
   }
@@ -46,8 +46,21 @@ class DelfinMinigame extends Scene
 
     if (this.lives > 0) image(img.delfin.lives[this.lives - 1], 0, 0, RES_X, RES_Y);
 
+    if (this.runMinigame && this.inactivity.doCounting)
+    {
+      this.inactivity.timer += deltaTime;
+      if (this.inactivity.timer > hintCountdownTime)
+      {
+        this.inactivity.timer = 0;
+        sound.dykkerens_kort.manglende_klik.play();
+      }
+    }
+
     if (this.init)
     {
+      this.inactivity.timer = 0;
+      this.inactivity.doCounting = true;
+
       this.lives = 3;
       this.wins = 0;
       this.soundHasPlayed.intro = false;
@@ -86,13 +99,7 @@ class DelfinMinigame extends Scene
 
     if (this.runMinigame)
     {
-      this.inactivity.time += deltaTime;
-      if (this.inactivity.time > 60000)
-      {
-        // speak
 
-        this.inactivity.time = 0;
-      }
 
 
       let img1 = null;
@@ -181,7 +188,6 @@ class DelfinMinigame extends Scene
       {
         if (mX > 550 * 5/3 && mX < 970 * 5/3)
         {
-
           if (mY > 350 * 5/3 && mY < 843 * 5/3)
           {
             this.userInput = (abs(ceil((mY - 375 * 5/3 - 440 * 5/3) / (31.43 * 5/3) - 0.5)) + 1);

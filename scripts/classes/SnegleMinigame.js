@@ -32,7 +32,7 @@ class SnegleMinigame extends Scene
     {
       intro: null,
       vundet: null,
-      tabt: null,
+      tabt: null
     }
 
   }
@@ -43,7 +43,7 @@ class SnegleMinigame extends Scene
     this.wins = 0;
     this.brikkerPrSneglehus = random([3,4,5]);
     this.inactivity.timer = 0;
-    this.inactivity.doCounting = false;
+    this.inactivity.doCounting = true;
     this.userInput = 1;
 
     this.soundHasPlayed.intro = false;
@@ -71,7 +71,7 @@ class SnegleMinigame extends Scene
 
   initMinigame()
   {
-    this.brikker = ceil(random(this.brikkerPrSneglehus * 2.1, 16));
+    this.brikker = ceil(random(this.brikkerPrSneglehus * 1.5, 16));
 
     this.xPosArr = [1283,1510,1750,2015,1212,1459,1743,2059,1921,1663,1415,1167,1549,1767,1965,2140];
     this.yPosArr = [1272,1299,1341,1269,1089,1083,1116,1047,904,893,878,888,714,708,719,801];
@@ -136,6 +136,16 @@ class SnegleMinigame extends Scene
     if (this.stage != "init" && this.stage != "startSkærm")
     image(img.sneglehuse.n[this.brikkerPrSneglehus - 3], 0, 0, RES_X, RES_Y);
 
+    if (this.stage == "runMinigame" && this.inactivity.doCounting)
+    {
+      this.inactivity.timer += deltaTime;
+      if (this.inactivity.timer > hintCountdownTime)
+      {
+        this.inactivity.timer = 0;
+        sound.sneglehuse.manglende_klik.play();
+      }
+    }
+
     for (let i = 0; i < this.buttonsArr.length; i++)
     {
       this.buttons[this.buttonsArr[i][0]].draw();
@@ -169,6 +179,7 @@ class SnegleMinigame extends Scene
 
   rigtigt()
   {
+    this.inactivity.doCounting = false;
     this.wins++;
     if (this.wins == 5)
     {

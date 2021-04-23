@@ -27,14 +27,14 @@ let sound =
   ved_klik_på_figur: null, // v
   sneglehuse: null, // v
   delfinbad: null, // v
-  fiskemad: null,
-  dykkerens_kort: null,
-  koralrev: null,
+  fiskemad: null, // v
+  dykkerens_kort: null, // v
+  koralrev: null, // v
   jokes: null,
   dialogbox: null, // v
-  vundet_spil: null, //
-  rigtigt_svar: null, //
-  forkert_svar: null //
+  vundet_spil: null, // v
+  rigtigt_svar: null, // v
+  forkert_svar: null // v
 }
 
 function preload()

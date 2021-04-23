@@ -25,11 +25,33 @@ class DykkerMinigame extends Scene
     }
     this.dots = [];
 
+    this.soundHasPlayed =
+    {
+      intro: null,
+      vundet: null,
+      tabt: null
+    }
+
   }
 
   draw()
   {
     image(this.background, 0, 0, RES_X, RES_Y);
+
+    if (this.stage != "runMinigame")
+    {
+      skildpadde.draw("dykkerspil");
+    }
+
+    if (this.stage == "runMinigame" && this.inactivity.doCounting)
+    {
+      this.inactivity.timer += deltaTime;
+      if (this.inactivity.timer > hintCountdownTime)
+      {
+        this.inactivity.timer = 0;
+        sound.dykkerens_kort.manglende_klik.play();
+      }
+    }
 
     this[this.stage]();
 
@@ -47,10 +69,15 @@ class DykkerMinigame extends Scene
 
   init()
   {
+    this.background = img.background.dyk;
     this.lives = 3;
 
+    this.inactivity.doCounting = true;
     this.inactivity.timer = 0;
-    this.doCounting = false;
+
+    this.soundHasPlayed.intro = false;
+    this.soundHasPlayed.vundet = false;
+    this.soundHasPlayed.tabt = false;
 
     let fractionSelection = [ [1,5], [1,4], [1,3], [1,2], [2,3], [2,5], [3,4], [3,5], [4,5] ];
     let decimalSelection = [0.1, 0.15, 0.3, 0.35, 0.45, 0.55, 0.65, 0.7, 0.85, 0.9];
@@ -168,7 +195,7 @@ class DykkerMinigame extends Scene
         this.dots[i].y += ceil(random(-20,20));
       }
 
-      this.background = img.dyk.kort;
+
 
     }
 
@@ -182,9 +209,15 @@ class DykkerMinigame extends Scene
 
   dykkerStartSkærm()
   {
-    // speak
+    // skilpadde speak
+    if (!this.soundHasPlayed.intro && !sound.dykkerens_kort.intro._playing && !sceneIsFading)
+    {
+      sound.dykkerens_kort.intro.play();
+      this.soundHasPlayed.intro = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.dykkerens_kort.intro._playing && this.soundHasPlayed.intro)
     {
       this.stage = "kortStartSkærm";
     }
@@ -192,10 +225,11 @@ class DykkerMinigame extends Scene
 
   kortStartSkærm()
   {
-    // speak
+    // speak (nej?)
 
     if (true)
     {
+      this.background = img.dyk.kort;
       this.stage = "runMinigame";
     }
   }
@@ -276,30 +310,43 @@ class DykkerMinigame extends Scene
 
   rigtigt(n)
   {
-    print("rigtig");
+    this.inactivity.doCounting = false;
     this.dots[n].isActive = false;
     if (n + 1 == this.dots.length)
     {
       this.stage = "victory";
     }
+    else
+    {
+      sound.rigtigt_svar.arr[ceil(random(0,6))-1].play();
+    }
   }
 
   forkert()
   {
-    print("forkert");
-
     this.lives--;
     if (this.lives == 0)
     {
       this.stage = "gameOver";
     }
+    else
+    {
+      sound.forkert_svar.arr[ceil(random(0,3))-1].play();
+    }
   }
 
   victory()
   {
-    // speak
+    this.background = img.background.dyk;
+    // skilpadde speak
+    if (!this.soundHasPlayed.vundet && !sound.dykkerens_kort.vundet._playing && !sceneIsFading)
+    {
+      sound.dykkerens_kort.vundet.play();
+      this.soundHasPlayed.vundet = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.dykkerens_kort.vundet._playing && this.soundHasPlayed.vundet)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       scene.lobby.buttons.dykker.updateImg();
@@ -309,9 +356,16 @@ class DykkerMinigame extends Scene
 
   gameOver()
   {
-    // speak
+    this.background = img.background.dyk;
+    // skilpadde speak
+    if (!this.soundHasPlayed.tabt && !sound.dykkerens_kort.tabt._playing && !sceneIsFading)
+    {
+      sound.dykkerens_kort.tabt.play();
+      this.soundHasPlayed.tabt = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.dykkerens_kort.tabt._playing && this.soundHasPlayed.tabt)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       this.init();

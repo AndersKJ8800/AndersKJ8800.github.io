@@ -38,6 +38,13 @@ class FiskMinigame extends Scene
       new Slice(7)
     ];
 
+    this.soundHasPlayed =
+    {
+      intro: null,
+      vundet: null,
+      tabt: null
+    }
+
   }
 
   init()
@@ -45,18 +52,26 @@ class FiskMinigame extends Scene
     this.lives = 3;
     this.wins = 0;
     this.inactivity.timer = 0;
-    this.inactivity.doCounting = false;
+    this.inactivity.doCounting = true;
 
-
+    this.soundHasPlayed.intro = false;
+    this.soundHasPlayed.vundet = false;
+    this.soundHasPlayed.tabt = false;
 
     this.stage = "startScreen";
   }
 
   startScreen()
   {
-    // speak
+    // skilpadde speak
+    if (!this.soundHasPlayed.intro && !sound.fiskemad.intro._playing && !sceneIsFading)
+    {
+      sound.fiskemad.intro.play();
+      this.soundHasPlayed.intro = true;
+    }
 
-    if (true)
+    // når speaken er færdig
+    if (!sound.fiskemad.intro._playing && this.soundHasPlayed.intro)
     {
       this.stage = "initMinigame";
     }
@@ -130,8 +145,12 @@ class FiskMinigame extends Scene
       this.fishArr[i].nFed = 0;
     }
 
-
-
+    this.soundHasPlayed =
+    {
+      intro: null,
+      vundet: null,
+      tabt: null
+    }
 
     this.stage = "runMinigame";
   }
@@ -227,6 +246,8 @@ class FiskMinigame extends Scene
 
   rigtigt(n)
   {
+    this.inactivity.doCounting = false;
+
     this.fishArr[n].nFed++;
 
     let bool = true;
@@ -245,6 +266,7 @@ class FiskMinigame extends Scene
       }
       else
       {
+        sound.rigtigt_svar.arr[ceil(random(0,6))-1].play();
         this.stage = "initMinigame";
       }
     }
@@ -259,12 +281,23 @@ class FiskMinigame extends Scene
     {
       this.stage = "gameOver";
     }
+    else
+    {
+      sound.forkert_svar.arr[ceil(random(0,3))-1].play();
+    }
   }
 
   gameOver()
   {
-    // speak
-    if (true)
+    // skilpadde speak
+    if (!this.soundHasPlayed.tabt && !sound.fiskemad.tabt._playing && !sceneIsFading)
+    {
+      sound.fiskemad.tabt.play();
+      this.soundHasPlayed.tabt = true;
+    }
+
+    // når speaken er færdig
+    if (!sound.fiskemad.tabt._playing && this.soundHasPlayed.tabt)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       this.init();
@@ -273,7 +306,15 @@ class FiskMinigame extends Scene
 
   victory()
   {
-    if (true)
+    // skilpadde speak
+    if (!this.soundHasPlayed.vundet && !sound.fiskemad.vundet._playing && !sceneIsFading)
+    {
+      sound.fiskemad.vundet.play();
+      this.soundHasPlayed.vundet = true;
+    }
+
+    // når speaken er færdig
+    if (!sound.fiskemad.vundet._playing && this.soundHasPlayed.vundet)
     {
       updateActiveScene(scene.lobby, "black", "slow");
       scene.lobby.buttons.fisk.updateImg();
@@ -296,9 +337,19 @@ class FiskMinigame extends Scene
   {
     image(this.background, 0, 0, RES_X, RES_Y);
 
+    skildpadde.draw("fiskemad");
+
     this[this.stage]();
 
-
+    if (this.stage == "runMinigame" && this.inactivity.doCounting)
+    {
+      this.inactivity.timer += deltaTime;
+      if (this.inactivity.timer > hintCountdownTime)
+      {
+        this.inactivity.timer = 0;
+        sound.fiskemad.manglende_klik.play();
+      }
+    }
 
 
 

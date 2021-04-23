@@ -65,9 +65,17 @@ class TitleScreen extends Scene
     colorMode(RGB);
     pop();
 
-    textSize(100);
-    fill(0,255,0);
-    text("title", 400, 200);
+    push();
+    stroke(0);
+    fill(255);
+    strokeWeight(6);
+    textSize(50);
+    if (ceil(millis() / 800) % 2 == 1)
+    {
+      text("Tryk på skærmen for at gå videre", RES_X / 2, RES_Y / 1.4 - (this.yOffset * 1.2));
+    }
+    pop();
+
   }
 
   mousebind()

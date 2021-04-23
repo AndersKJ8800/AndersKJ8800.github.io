@@ -45,7 +45,7 @@ class Skildpadde
     if (typeof type == "undefined") type = "def";
 
     image(img.skildpadde[type][0],0,0,RES_X,RES_Y);
-    if (this.mouthIsOpen) image(img.skildpadde[type][1],0,0,RES_X,RES_Y);
+    if (this.mouthIsOpen && !sceneIsFading) image(img.skildpadde[type][1],0,0,RES_X,RES_Y);
 
   }
 

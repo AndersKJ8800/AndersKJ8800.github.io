@@ -59,9 +59,6 @@ class Lobby extends Scene
       this.introHasPlayed = true;
     }
     super.draw();
-    textSize(100);
-    fill(0,255,0);
-    text("lobby", 400, 200);
   }
 
   keybind()
