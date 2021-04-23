@@ -34,7 +34,7 @@ class Skildpadde
 
     if (this.soundIsPlaying)
     {
-      if (ceil(millis() / 300) % 2) this.mouthIsOpen = true;
+      if (ceil(millis() / 500) % 2) this.mouthIsOpen = true;
       else this.mouthIsOpen = false;
     }
     else

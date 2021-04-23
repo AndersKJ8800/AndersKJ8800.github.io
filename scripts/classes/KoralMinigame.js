@@ -266,6 +266,7 @@ class KoralMinigame extends Scene
 
   victory()
   {
+    minigamesWon.koral = true;
     // skilpadde speak
     if (!this.soundHasPlayed.vundet && !sound.koralrev.vundet._playing && !sceneIsFading)
     {

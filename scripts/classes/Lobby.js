@@ -58,6 +58,28 @@ class Lobby extends Scene
       sound.intro.play();
       this.introHasPlayed = true;
     }
+
+    allMinigamesWon = true;
+    if (!minigamesWon.delfin) allMinigamesWon = false;
+    if (!minigamesWon.dykker) allMinigamesWon = false;
+    if (!minigamesWon.koral) allMinigamesWon = false;
+    if (!minigamesWon.snegle) allMinigamesWon = false;
+    if (!minigamesWon.fisk) allMinigamesWon = false;
+
+    if (!sceneIsFading && allMinigamesWon && !victorySoundHasPlayed)
+    {
+      if (!sound.vundet_spil._playing)
+      {
+        sound.vundet_spil.play();
+        music.stop();
+        victorySoundHasPlayed = true;
+      }
+      if (!partyMusic._playing)
+      {
+        partyMusic.loop();
+        partyMusic.setVolume(0.08);
+      }
+    }
     super.draw();
   }
 

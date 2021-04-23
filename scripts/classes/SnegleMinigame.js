@@ -207,6 +207,7 @@ class SnegleMinigame extends Scene
 
   victory()
   {
+    minigamesWon.snegle = true;
     // skilpadde speak
     if (!this.soundHasPlayed.vundet && !sound.sneglehuse.vundet._playing && !sceneIsFading)
     {

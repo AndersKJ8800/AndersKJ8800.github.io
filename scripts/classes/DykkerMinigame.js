@@ -337,6 +337,7 @@ class DykkerMinigame extends Scene
 
   victory()
   {
+    minigamesWon.dykker = true;
     this.background = img.background.dyk;
     // skilpadde speak
     if (!this.soundHasPlayed.vundet && !sound.dykkerens_kort.vundet._playing && !sceneIsFading)

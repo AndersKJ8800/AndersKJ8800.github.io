@@ -16,10 +16,8 @@ let hitboxImg =
     koraller: null
   }
 };
-let music =
-{
-  default: null
-}
+let music;
+let partyMusic;
 let sound =
 {
   start: null, // v
@@ -151,10 +149,8 @@ function preload()
 
 
   //musssik
-  music =
-  {
-    //default: loadSound("resources/sound/music/default.mp3")
-  }
+  music = loadSound("resources/sound/music/default.mp3");
+  partyMusic = loadSound("resources/sound/music/party.mp3");
 
   sound =
   {
@@ -232,7 +228,6 @@ function preload()
       ]
     }
   }
-
 
 }
 

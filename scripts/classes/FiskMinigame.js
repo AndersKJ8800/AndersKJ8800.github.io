@@ -306,6 +306,7 @@ class FiskMinigame extends Scene
 
   victory()
   {
+    minigamesWon.fisk = true;
     // skilpadde speak
     if (!this.soundHasPlayed.vundet && !sound.fiskemad.vundet._playing && !sceneIsFading)
     {

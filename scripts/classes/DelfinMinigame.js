@@ -217,7 +217,7 @@ class DelfinMinigame extends Scene
 
     if (this.victory)
     {
-
+      minigamesWon.delfin = true;
       // skilpadde speak
       if (!this.soundHasPlayed.vundet && !sound.delfinbad.vundet._playing && !sceneIsFading)
       {

@@ -18,6 +18,16 @@ let color =
 let mouseIsDown = false;
 let hintCountdownTime = 60000;
 let skildpadde = null;
+let minigamesWon =
+{
+  delfin: false,
+  dykker: false,
+  koral: false,
+  snegle: false,
+  fisk: false
+}
+let allMinigamesWon = false;
+let victorySoundHasPlayed = false;
 
 function setup()
 {
@@ -28,8 +38,7 @@ function setup()
   textAlign(CENTER, CENTER);
   createCanvas(1,1);
   createScaledCanvas(RES_X, RES_Y);
-  masterVolume(0.2);
-  //music.default.play();
+  masterVolume(0.3);
   skildpadde = new Skildpadde();
   scene =
   {
@@ -81,6 +90,11 @@ function keyTyped()
 
 function mousePressed()
 {
+  if (!music._playing)
+  {
+    music.loop();
+    music.setVolume(0.1);
+  }
   if (RES_Y * scaling >= mouseY && RES_X * scaling >= mouseX && mouseY >= 0 && mouseX >= 0) // hvis musen er indenfor spillets rammer
   {
     if (!sceneIsFading)
