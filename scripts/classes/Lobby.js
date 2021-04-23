@@ -59,6 +59,8 @@ class Lobby extends Scene
       this.introHasPlayed = true;
     }
 
+    skildpadde.draw();
+
     allMinigamesWon = true;
     if (!minigamesWon.delfin) allMinigamesWon = false;
     if (!minigamesWon.dykker) allMinigamesWon = false;
